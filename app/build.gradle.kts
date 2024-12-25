@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.annalech.gamecompositionofthenumber"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.annalech.gamecompositionofthenumber"
