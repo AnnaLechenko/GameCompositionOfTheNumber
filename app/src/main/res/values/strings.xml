@@ -12,5 +12,5 @@
     <string name="questions_sum">1</string>
     <string name="left_number">7</string>
     <string name="qustion_char">\?</string>
-    <string name="progress_answer">Правильных ответов %s ( минимум %s)</string>
+    <string name="progress_answer">Правильных ответов %d ( минимум %d)</string>
 </resources>
