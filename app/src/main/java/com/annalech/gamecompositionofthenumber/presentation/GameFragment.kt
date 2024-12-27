@@ -18,13 +18,19 @@ import com.annalech.gamecompositionofthenumber.domain.entity.Level
 class GameFragment : Fragment() {
 
     private lateinit var level : Level
+    private val viewModelFactory  by lazy{
+        GameViewModelFactory(level, requireActivity().application)
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(
             this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+            viewModelFactory
             )[GameViewModel::class.java]
     }
+
+
+
     private val tvOption by lazy {
         mutableListOf<TextView>().apply {
             add(binding.tbOption1)
@@ -60,7 +66,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
          setClickListnerToOption()
-        viewModel.startGame(level)
+
 
 
     }

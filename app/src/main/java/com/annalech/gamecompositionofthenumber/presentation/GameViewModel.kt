@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.annalech.gamecompositionofthenumber.R
 import com.annalech.gamecompositionofthenumber.data.GameRepositoryImpl
 import com.annalech.gamecompositionofthenumber.domain.entity.GameResult
@@ -14,7 +15,10 @@ import com.annalech.gamecompositionofthenumber.domain.entity.Qestion
 import com.annalech.gamecompositionofthenumber.domain.useCase.GeneratedQuestionUseCase
 import com.annalech.gamecompositionofthenumber.domain.useCase.GetGameSettingsUseCase
 
-class GameViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(
+    private val  application: Application,
+    private val level: Level,
+) : ViewModel() {
 
     private val _formattedTime = MutableLiveData<String>()
     val formattedTime:LiveData<String>
@@ -55,23 +59,26 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val context = application
 
     private lateinit var gameSetting: GameSetting
-    private lateinit var level : Level
+
 
     val repository = GameRepositoryImpl
 
     val generatedQuestionUseCase = GeneratedQuestionUseCase(repository)
     val getGameSettingUseCase = GetGameSettingsUseCase(repository)
 
+    init {
+        startGame()
+    }
     //сохранение настроек в переменные полученные из выбранного уровня
-   fun startGame(level: Level){
-       getGameSettings(level)
+   private fun startGame( ){
+       getGameSettings( )
         startTimer()
         generatedQuestion()
         updateProgress()
    }
 
-    private fun getGameSettings(level: Level){
-        this.level = level
+    private fun getGameSettings( ){
+
         this.gameSetting = getGameSettingUseCase(level)
         _minPercent.value = gameSetting.minPercentOfRightAnswer
     }
@@ -140,7 +147,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
         //отображение данных прогресса
         _progressAnswer.value = String.format(
-            context.resources.getString(R.string.progress_answer),
+            application.resources.getString(R.string.progress_answer),
             countOfRightAnswer ,
             gameSetting.minCountOfRightAnswer
         )
