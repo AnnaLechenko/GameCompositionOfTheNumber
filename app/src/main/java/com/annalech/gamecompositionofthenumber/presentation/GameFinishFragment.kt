@@ -38,19 +38,59 @@ class GameFinishFragment:Fragment() {
     //кнопка назад на переход страницы выбора упровня или другую
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       setupClickListners()
+        bindViews()
+
+
+    }
+private fun bindViews(){
+    binding.imageResult.setImageResource(getSmileResId())
+    binding.tvRequieredAnswer.text = String.format(
+        getString(R.string.requiredAnswer),
+        gameResult.gameSettings.minCountOfRightAnswer
+    )
+    binding.tvScoreAnswer.text = String.format(
+        getString(R.string.scoreAnswer),
+        gameResult.countOfRightAnswer
+    )
+    binding.tvRequieredPercentage.text = String.format(
+        getString(R.string.requiered_percent),
+        gameResult.gameSettings.minPercentOfRightAnswer
+    )
+    binding.tvScorePercentage.text = String.format(
+        getString(R.string.score_perce),
+       getPercentRightAnswers()   )
+}
+
+    private fun getPercentRightAnswers() = with(gameResult){
+        if (countOfRightAnswer==0){
+            0
+        }else {
+            ( (countOfRightAnswer/countOfQuestions.toDouble())*100).toInt()
+        }
+    }
+
+
+    private fun getSmileResId():Int{
+        return if(gameResult.winner){
+            R.drawable.suscess_final_ic
+        }else{
+            R.drawable.no_sucsess_final
+        }
+    }
+
+    private fun setupClickListners(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-               retryGame()
-            }
+                override fun handleOnBackPressed() {
+                    retryGame()
+                }
 
-        })
+            })
 
         binding.buttonRetry.setOnClickListener{
             retryGame()
         }
-
-
     }
 
     override fun onDestroyView() {
