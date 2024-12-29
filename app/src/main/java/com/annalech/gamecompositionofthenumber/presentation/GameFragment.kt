@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.annalech.gamecompositionofthenumber.R
 import com.annalech.gamecompositionofthenumber.databinding.FragmentGameBinding
 import com.annalech.gamecompositionofthenumber.domain.entity.GameResult
@@ -129,10 +130,10 @@ class GameFragment : Fragment() {
 
 
     private fun launchGameFinishFragment(gameResult: GameResult){
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFinishFragment.newInstance(gameResult))
-            .addToBackStack(null)
-            .commit()
+       val args = Bundle().apply {
+           putParcelable(GameFinishFragment.KEY_GAME_RESULT, gameResult)
+       }
+        findNavController().navigate(R.id.action_gameFragment_to_gameFinishFragment2, args)
 
     }
     private fun parseLevel(){
@@ -145,7 +146,7 @@ class GameFragment : Fragment() {
     companion object{
 
         const val  NAME = "GameFragment"
-        private const val KEY_LEVEL =  "level"
+        const val KEY_LEVEL =  "level"
 
         fun newInstance(level: Level):GameFragment{
             return GameFragment().apply {

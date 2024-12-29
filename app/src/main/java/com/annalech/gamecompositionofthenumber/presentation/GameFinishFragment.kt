@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.annalech.gamecompositionofthenumber.R
 import com.annalech.gamecompositionofthenumber.databinding.FragmentFinishGameBinding
 import com.annalech.gamecompositionofthenumber.domain.entity.GameResult
@@ -80,13 +81,6 @@ private fun bindViews(){
     }
 
     private fun setupClickListners(){
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
-            object : OnBackPressedCallback(true){
-                override fun handleOnBackPressed() {
-                    retryGame()
-                }
-
-            })
 
         binding.buttonRetry.setOnClickListener{
             retryGame()
@@ -104,10 +98,7 @@ private fun bindViews(){
              }  }
 
     private fun retryGame(){
-        requireActivity().supportFragmentManager.popBackStack(
-            GameFragment.NAME,
-            FragmentManager.POP_BACK_STACK_INCLUSIVE
-        )
+        findNavController().popBackStack()
     }
 
 
@@ -115,7 +106,7 @@ private fun bindViews(){
 
     companion object{
 
-        private const val KEY_GAME_RESULT = "result game"
+         const val KEY_GAME_RESULT = "result game"
 
         fun newInstance(gameResult: GameResult):GameFinishFragment{
             return GameFinishFragment().apply {
