@@ -53,19 +53,9 @@ class ChooseLevelFragment: Fragment() {
     }
 
     private fun transitionToLevel(level: Level){
-        val arg = Bundle().apply {
-            putParcelable(GameFragment.KEY_LEVEL,level)
-        }
-        findNavController().navigate(R.id.action_chooseLevelFragment2_to_gameFragment, arg)
+
+        findNavController().navigate(ChooseLevelFragmentDirections.actionChooseLevelFragment2ToGameFragment(level))
     }
 
 
-    companion object{
-
-        const val NAME = "ChooseLevelFragment"
-
-        fun newInstance(): ChooseLevelFragment{
-            return ChooseLevelFragment()
-        }
-    }
 }
