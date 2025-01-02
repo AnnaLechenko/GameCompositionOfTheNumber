@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     kotlin("plugin.serialization") version "2.0.21"
     id("androidx.navigation.safeargs")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -37,7 +38,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures{
-        viewBinding = true
+        dataBinding  = true
     }
 }
 

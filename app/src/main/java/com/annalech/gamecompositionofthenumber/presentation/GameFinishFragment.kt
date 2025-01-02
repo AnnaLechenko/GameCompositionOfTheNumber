@@ -13,6 +13,8 @@ import com.annalech.gamecompositionofthenumber.R
 import com.annalech.gamecompositionofthenumber.databinding.FragmentFinishGameBinding
 import com.annalech.gamecompositionofthenumber.domain.entity.GameResult
 
+
+
 class GameFinishFragment:Fragment() {
 
 
@@ -43,41 +45,9 @@ class GameFinishFragment:Fragment() {
     }
 
     private fun bindViews() {
-        binding.imageResult.setImageResource(getSmileResId())
-        binding.tvRequieredAnswer.text = String.format(
-            getString(R.string.requiredAnswer),
-            args.gameResult.gameSettings.minCountOfRightAnswer
-        )
-        binding.tvScoreAnswer.text = String.format(
-            getString(R.string.scoreAnswer),
-            args.gameResult.countOfRightAnswer
-        )
-        binding.tvRequieredPercentage.text = String.format(
-            getString(R.string.requiered_percent),
-            args.gameResult.gameSettings.minPercentOfRightAnswer
-        )
-        binding.tvScorePercentage.text = String.format(
-            getString(R.string.score_perce),
-            getPercentRightAnswers()
-        )
+        binding.gameResult = args.gameResult
     }
 
-    private fun getPercentRightAnswers() = with(args.gameResult) {
-        if (countOfRightAnswer == 0) {
-            0
-        } else {
-            ((countOfRightAnswer / countOfQuestions.toDouble()) * 100).toInt()
-        }
-    }
-
-
-    private fun getSmileResId(): Int {
-        return if (args.gameResult.winner) {
-            R.drawable.suscess_final_ic
-        } else {
-            R.drawable.no_sucsess_final
-        }
-    }
 
     private fun setupClickListners() {
 
