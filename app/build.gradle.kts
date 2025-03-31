@@ -1,11 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize")
+    kotlin("plugin.serialization") version "2.0.21"
+  //  id("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs.kotlin")
+    id ("kotlin-kapt")
 }
 
-android {
+android{
     namespace = "com.annalech.gamecompositionofthenumber"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.annalech.gamecompositionofthenumber"
@@ -33,6 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        dataBinding  = true
+    }
 }
 
 dependencies {
@@ -45,4 +53,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    val nav_version = "2.8.4"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 }

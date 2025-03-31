@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".presentation.ChooseLevelFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_choose_level"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#686464"
+        android:layout_marginTop="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+
+        />
+
+    <Button
+        android:id="@+id/button_level_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+    android:backgroundTint="#009688"
+        android:text="@string/bn_test_level"
+        android:textAlignment="center"
+        />
+    <Button
+        android:id="@+id/button_level_easy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#8BC34A"
+        android:text="@string/bt_level_easy"
+        android:textAlignment="center"
+        />
+    <Button
+        android:id="@+id/button_level_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#FFC107"
+        android:text="@string/bt_level_normal"
+        android:textAlignment="center"
+        />
+    <Button
+        android:id="@+id/button_level_hard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#E91E63"
+        android:text="@string/bt_level_hard"
+        android:textAlignment="center"
+        />
+
+</LinearLayout></layout>
